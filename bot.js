@@ -1,7 +1,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
-const client = new Discord.Client();
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
@@ -28,13 +27,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         args = args.splice(1);
         msg = "```yaml\n" + args + "```"
         msg = msg.replace(/,/g, " ");
-        msg = msg + "\nposted by " + user
+        msg = msg + "\n*posted by " + user + "*"
         switch(cmd) {
             // !ping
             case 'add':
                 bot.sendMessage({
                     to: channelID,
                     message: (msg)
+
                 });
             break;
             // Just add any case commands if you want to..
